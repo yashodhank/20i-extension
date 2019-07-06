@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>20i Helper</title>
+    <style>
+      body {
+        text-align: center;
+      }
+
+      #20iLogo {
+        width: 100px;
+        margin: 5px;
+      }
+
+      button {
+      border: 2px solid black;
+      background-color: black;
+      color: white;
+      cursor: pointer;
+      font-family: Montserrat,sans-serif;
+      font-size: 15px;
+      padding: 5px 10px;
+      width: auto;
+      }
+
+      button:hover {
+        background-color: #e5ac33;
+      }
+    </style>
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+     -->
+  </head>
+  <body>
+    <div id=main-popup>
+      <img src='./20i_logo.jpg' id='20iLogo'>
+      <button id='stackstaging'><b>StackStaging!</b></button>
+   <!-- link to non-persistent background script -->
+   </div>
+   <script src="popup.js"></script>
+  </body>
+</html>
