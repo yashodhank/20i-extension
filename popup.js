@@ -2,7 +2,7 @@ function modifyUrlStringToStack(url){
 	if (!url.includes("stackstaging")){
 		var protocolRegex = /^(http|https):\/\//;
 		var wwwRegex = /www\./;
-		var dotRegex = /\./;
+		var dotRegex = /\./g;
 
 		url = url.replace(protocolRegex, "");
 		url = url.replace(wwwRegex, "");
@@ -20,22 +20,22 @@ function modifyUrlStringToStack(url){
 	else {return -1;}
 }
 
-function modifyUrlStringFromStack(url){
+function modifyUrlStringFromStack(url, https){
 	if (url.includes("stackstaging")){
 		var protocolRegex = /^(http|https):\/\//;
-		var dashRegex = /\-/;
+		var dashRegex = /\-/g;
 
 		url = url.replace(protocolRegex, "");
-		
+	
 		slashIndex = url.indexOf("/");
-		dotIndex = url.indexOf(".");
 		query = url.substring(slashIndex != -1 ? slashIndex : url.length, url.length);
 
+		dotIndex = url.indexOf(".");
 		url = url.substring(0, dotIndex != -1 ? dotIndex : url.length);
-
+	
 		url = url.replace(dashRegex, ".");
 		
-		url = "https://" + url + query;
+		https ? url = "https://" + url + query : url = "http://" + url + query;
 		return url;
 	}
 	else {return -1;}
@@ -65,10 +65,12 @@ function setStackUrl(event) {
 
 function unsetStackUrl(event) {
 	removeMessage();
+	var https;
+	getRadioValue("protocol") == "HTTPS" ? https = true : https = false;
 	chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
 	function(tab){
 		url = tab[0].url;
-		modified_url = modifyUrlStringFromStack(url);
+		modified_url = modifyUrlStringFromStack(url, https);
 		if(modified_url!=-1){
 		setUrl(modified_url)
 		}
@@ -91,7 +93,9 @@ function removeMessage(){
 		removed=document.getElementById("main-popup").removeChild(document.getElementById("message"));
 	}
 }
-
+function getRadioValue(name){
+	return document.querySelector(`input[name=${name}]:checked`).value;
+}
 document.getElementById('stackstaging-button').addEventListener('click', setStackUrl);
 document.getElementById('unstackstaging-button').addEventListener('click', unsetStackUrl);
 
