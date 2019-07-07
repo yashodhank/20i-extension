@@ -2,7 +2,7 @@
   <head>
     <title>20i Helper</title>
     <style>
-      body {
+        body {
         text-align: center;
       }
 
@@ -17,14 +17,15 @@
       color: white;
       cursor: pointer;
       font-family: Montserrat,sans-serif;
-      font-size: 15px;
+      font-size: 10vw;
       padding: 5px 10px;
-      width: auto;
+      margin: 5px;
       }
 
       button:hover {
         background-color: #e5ac33;
       }
+      
     </style>
     <!--
       - JavaScript and HTML must be in separate files: see our Content Security
@@ -34,10 +35,16 @@
      -->
   </head>
   <body>
-    <div id=main-popup>
-      <img src='./20i_logo.jpg' id='20iLogo'>
-      <button id='stackstaging'><b>StackStaging!</b></button>
-   <!-- link to non-persistent background script -->
+      <div id=main-popup>
+        <img src='./20i_logo.jpg' id='20iLogo'>
+<div id=buttons>
+  <div id=stackstaging>
+      <button id='stackstaging-button'><b>StackStaging!</b></button>
+    </div>
+    <div id=unstackstaging>
+      <button id='unstackstaging-button'><b>Un-StackStaging!</b></button>
+    </div>
+    </div>    
    </div>
    <script src="popup.js"></script>
   </body>
