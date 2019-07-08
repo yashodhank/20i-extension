@@ -1,24 +1,23 @@
     body {
-        text-align: center;
-      }
+      text-align: center;
+    }
 
-      #20iLogo {
-        width: 100px;
-        margin: 5px;
-      }
+    #20iLogo {
+      width: 100px;
+      margin: 5px;
+    }
 
-      button {
+    button {
       border: 2px solid black;
       background-color: black;
       color: white;
       cursor: pointer;
-      font-family: Montserrat,sans-serif;
+      font-family: Montserrat, sans-serif;
       font-size: 10vw;
       padding: 5px 10px;
-      margin: 5px;      
-      }
+      margin: 5px;
+    }
 
-      button:hover {
-        background-color: #e5ac33;
-      }
-
+    button:hover {
+      background-color: #e5ac33;
+    }
