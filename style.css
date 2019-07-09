@@ -1,10 +1,40 @@
+    html,
     body {
       text-align: center;
+      width: 500px;
+      height: 100%;
+      margin: 0;
+      padding: 0;
     }
 
-    #20iLogo {
-      width: 100px;
-      margin: 5px;
+    .header {
+      align-items: center;
+      background: linear-gradient(160deg, #f05d1c, #f99d0d);
+      height: 4rem;
+      display: flex;
+    }
+
+    .header__link:focus {
+      outline: none;
+    }
+
+    .header__logo {
+      display: inline-block;
+      margin: .2rem 0 0 1.5rem;
+      -webkit-backface-visibility: hidden;
+      -webkit-transform: translateZ(0) scale(1.0, 1.0);
+      transform: translateZ(0);
+      height: 2rem;
+    }
+
+    .header__title {
+      color: white;
+      padding-top: 1rem;
+    }
+
+    .buttons{
+      float: left;
+      padding: 5px;
     }
 
     button {
@@ -13,9 +43,11 @@
       color: white;
       cursor: pointer;
       font-family: Montserrat, sans-serif;
-      font-size: 10vw;
+      font-size: 20px;
       padding: 5px 10px;
       margin: 5px;
+      width: 150px;
+
     }
 
     button:hover {
