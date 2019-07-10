@@ -52,11 +52,12 @@ function setUrl(url) {
 			chrome.tabs.update(tab.id, {
 				url: modified_url
 			});
+			displayIP();
 		});
 }
 
 function setStackUrl(event) {
-	removeMessage();
+	removeMessage("buttons","warning");
 	chrome.tabs.query({
 			'active': true,
 			'windowId': chrome.windows.WINDOW_ID_CURRENT
@@ -67,13 +68,13 @@ function setStackUrl(event) {
 			if (modified_url != -1) {
 				setUrl(modified_url)
 			} else {
-				addMessage("Already StackStaging!");
+				addMessage("buttons","warning","Already StackStaging!");
 			}
 		});
 }
 
 function unsetStackUrl(event) {
-	removeMessage();
+	removeMessage("buttons","warning");
 	var https;
 	getRadioValue("protocol") == "HTTPS" ? https = true : https = false;
 	chrome.tabs.query({
@@ -86,22 +87,22 @@ function unsetStackUrl(event) {
 			if (modified_url != -1) {
 				setUrl(modified_url)
 			} else {
-				addMessage("Not on Stackstaging!");
+				addMessage("buttons","warning","Not on Stackstaging!");
 
 			}
 		});
 }
 
-function addMessage(text) {
+function addMessage(element, childId="message", text) {
 	message = document.createElement("p");
 	message.innerHTML = text;
-	message.id = "message";
-	document.getElementById('main-popup').appendChild(message);
+	message.id = childId;
+	document.getElementById(element).appendChild(message);
 }
 
-function removeMessage() {
-	if (document.getElementById("main-popup").contains(document.getElementById("message"))) {
-		removed = document.getElementById("main-popup").removeChild(document.getElementById("message"));
+function removeMessage(element, childId="message") {
+	if (document.getElementById(element).contains(document.getElementById(childId))) {
+		removed = document.getElementById(element).removeChild(document.getElementById(childId));
 	}
 }
 
@@ -110,3 +111,41 @@ function getRadioValue(name) {
 }
 document.getElementById('stackstaging-button').addEventListener('click', setStackUrl);
 document.getElementById('unstackstaging-button').addEventListener('click', unsetStackUrl);
+
+
+// chrome.extension.sendRequest({}, function(response) {
+// 	if (response.domainToIP !== null) {
+// 		ip = response.domainToIP;
+// 		addMessage("ip-display",ip);
+// 		alert("Done!");
+// 	}
+// });
+
+
+function displayIP(){
+	chrome.tabs.query({
+		'active': true,
+		'windowId': chrome.windows.WINDOW_ID_CURRENT
+	},
+	function (tabs) {
+	chrome.runtime.sendMessage(tabs[0].url, function(response){
+		removeMessage("ip-display","ip");
+		if(response !== undefined){
+		let currentIP = response.domainToIP;
+		addMessage("ip-display","ip",currentIP);
+		}
+		else{
+			addMessage("ip-display","ip","Loading...");
+			console.log("Loading.");
+			setTimeout(() => {
+				displayIP();	
+			}, 1000);
+			
+		}
+	});
+});
+	
+}
+
+displayIP();
+

@@ -1,7 +1,7 @@
     html,
     body {
       text-align: center;
-      width: 500px;
+      width: 400px;
       height: 100%;
       margin: 0;
       padding: 0;
@@ -32,10 +32,21 @@
       padding-top: 1rem;
     }
 
-    .buttons{
-      float: left;
+    .buttons {
       padding: 5px;
     }
+
+    .main{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .ip-display {
+      padding: 10px 20px;
+      outline: 5px dotted orange;
+    }
+
 
     button {
       border: 2px solid black;
