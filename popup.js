@@ -109,19 +109,8 @@ function removeMessage(element, childId="message") {
 function getRadioValue(name) {
 	return document.querySelector(`input[name=${name}]:checked`).value;
 }
-document.getElementById('stackstaging-button').addEventListener('click', setStackUrl);
-document.getElementById('unstackstaging-button').addEventListener('click', unsetStackUrl);
 
-
-// chrome.extension.sendRequest({}, function(response) {
-// 	if (response.domainToIP !== null) {
-// 		ip = response.domainToIP;
-// 		addMessage("ip-display",ip);
-// 		alert("Done!");
-// 	}
-// });
-
-
+//Get IP address from background script
 function displayIP(){
 	chrome.tabs.query({
 		'active': true,
@@ -129,14 +118,14 @@ function displayIP(){
 	},
 	function (tabs) {
 	chrome.runtime.sendMessage(tabs[0].url, function(response){
-		removeMessage("ip-display","ip");
+		removeMessage("ip-display","ip"); //Remove current IP (if present)
 		if(response !== undefined){
 		let currentIP = response.domainToIP;
 		addMessage("ip-display","ip",currentIP);
 		}
 		else{
 			addMessage("ip-display","ip","Loading...");
-			console.log("Loading.");
+			//If IP isn't present (can happen on inital page load), re-run display() after 1s wait
 			setTimeout(() => {
 				displayIP();	
 			}, 1000);
@@ -148,4 +137,6 @@ function displayIP(){
 }
 
 displayIP();
+document.getElementById('stackstaging-button').addEventListener('click', setStackUrl);
+document.getElementById('unstackstaging-button').addEventListener('click', unsetStackUrl);
 

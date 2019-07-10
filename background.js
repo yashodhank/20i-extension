@@ -34,12 +34,10 @@ chrome.tabs.onRemoved.addListener(
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        console.log("Message");
         var currentURL = request;
-        console.log(currentURL);
         if (currentIPList[currentURL].ip !== undefined) {
             sendResponse({
-                domainToIP: currentIPList[currentURL].ip
+                domainToIP: currentIPList[currentURL].ip //Send back current IP based on provided URL
             });
         } else {
             //IP not found in array (maybe an iframe has been loaded).
