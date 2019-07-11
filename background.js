@@ -20,15 +20,11 @@ chrome.webRequest.onCompleted.addListener(
 //Garbage collection - remove objects for closed tabs
 chrome.tabs.onRemoved.addListener(
     function (tabId, removeInfo) {
-        console.table(currentIPList)
-        for (object in currentIPList){
-            if(currentIPList[object].id == tabId){
-                console.log("Deleted!")
+        for (object in currentIPList) {
+            if (currentIPList[object].id == tabId) {
                 delete currentIPList[object]
             }
         }
-        console.table(currentIPList)
-        
     }
 );
 
