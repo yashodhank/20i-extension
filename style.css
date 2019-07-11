@@ -1,7 +1,7 @@
     html,
     body {
       text-align: center;
-      width: 400px;
+      width: 500px;
       height: 100%;
       margin: 0;
       padding: 0;
@@ -36,15 +36,23 @@
       padding: 5px;
     }
 
-    .main{
+    .main {
       display: flex;
       flex-direction: row;
       justify-content: space-around;
       align-items: center;
     }
+
     .ip-display {
       padding: 10px 20px;
+      font-size: 0.75rem;
       outline: 5px dotted orange;
+      max-width: 50vw;
+      max-height: 10vw;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
     }
 
     button {
